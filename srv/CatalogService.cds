@@ -6,18 +6,22 @@
 // using { anubhav.db.master, anubhav.db.transaction } from '../db/datamodel';
 
 using {
+    anubhav.db,
     anubhav.db.master,
     anubhav.db.transaction,
     anubhav.db.CDSViews
 } from '../db/datamodel';
+using { CV_PO_ANA } from '../db/exposure';
 
 
 service CatalogService @(path : '/CatalogService') {
-
+    @readonly
+    entity Cv_Purchase                         as projection on CV_PO_ANA;
     entity EmployeeSet                         as projection on master.employees;
     entity AddressSet                          as projection on master.address;
     entity ProductSet                          as projection on master.product;
     entity BPSet                               as projection on master.businesspartner;
+    function sleep() returns Boolean;
 
     entity POs @(title : '{i18n>poHeader}')    as projection on transaction.purchaseorder {
         *,
