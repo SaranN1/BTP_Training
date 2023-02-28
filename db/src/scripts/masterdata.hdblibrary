@@ -1,0 +1,36 @@
+LIBRARY "masterdata" 
+  LANGUAGE SQLSCRIPT AS 
+BEGIN public variable rowcount int;
+  public 
+  FUNCTION "employee_exists"(IN im_employee_id nvarchar(36)) 
+  RETURNS res boolean AS 
+  BEGIN
+  DECLARE lv_count int;
+  SELECT COUNT(*) INTO lv_count
+  FROM "ANUBHAV_DB_MASTER_EMPLOYEES"
+  WHERE loginname = im_employee_id;
+  IF lv_count > 0 THEN res = TRUE;
+  ELSE res = false;
+END IF;
+END;
+public 
+PROCEDURE "get_employee_data"(out ex_employees "ANUBHAV_DB_MASTER_EMPLOYEES") 
+LANGUAGE SQLSCRIPT 
+SQL SECURITY INVOKER AS 
+BEGIN ex_employees =
+SELECT *
+FROM "ANUBHAV_DB_MASTER_EMPLOYEES";
+rowcount = record_count(:ex_employees);
+END;
+public 
+PROCEDURE "get_business_partner_data"(
+  out ex_businesspartners "ANUBHAV_DB_MASTER_BUSINESSPARTNER"
+) 
+LANGUAGE SQLSCRIPT 
+SQL SECURITY INVOKER AS 
+BEGIN ex_businesspartners =
+SELECT *
+FROM "ANUBHAV_DB_MASTER_BUSINESSPARTNER";
+rowcount = record_count(:ex_businesspartners);
+END;
+END

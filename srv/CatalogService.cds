@@ -17,6 +17,8 @@ using { CV_PO_ANA } from '../db/exposure';
 service CatalogService @(path : '/CatalogService') {
     @readonly
     entity Cv_Purchase                         as projection on CV_PO_ANA;
+
+    //@Capabilities.Insertable: false
     entity EmployeeSet                         as projection on master.employees;
     entity AddressSet                          as projection on master.address;
     entity ProductSet                          as projection on master.product;
