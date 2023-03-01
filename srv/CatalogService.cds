@@ -28,6 +28,9 @@ service CatalogService @(path : '/CatalogService') {
     entity POs @(title : '{i18n>poHeader}')    as projection on transaction.purchaseorder {
         *,
         Items : redirected to POItems
+    }actions{
+        function largestOrder() returns array of POs;
+        action boost();
     }
 
     entity POItems @(title : '{i18n>poItems}') as projection on transaction.poitems {

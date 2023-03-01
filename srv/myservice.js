@@ -16,11 +16,26 @@ const mysrvdemo = function(srv){
 
         var results = [];
 
-        results.push({
-            "ID":"02BD2137-0890-1EEA-A6C2-BB55C19787FB",
-            "nameFirst": "Christiano",
-            "nameLast":"Ronaldo"
-        });
+        // results.push({
+        //     "ID":"02BD2137-0890-1EEA-A6C2-BB55C19787FB",
+        //     "nameFirst": "Christiano",
+        //     "nameLast":"Ronaldo"
+        // });
+
+        //CDS Query Language - SELECT * FROM dbtab
+        //results = await cds.tx(req).run(SELECT.from(employees).limit(3));
+
+        //CDS Query to read single record with where
+        //results = await cds.tx(req).run(SELECT.from(employees).where({"nameFirst": "Susan"}));
+
+        //CDS Query if user pass key like /Entity/key
+        var whereCondition = req.data;
+        console.log(whereCondition);
+        if(whereCondition.hasOwnProperty("ID")){
+            results = await cds.tx(req).run(SELECT.from(employees).where(whereCondition));
+        }else{
+            results = await cds.tx(req).run(SELECT.from(employees).limit(1));
+        }
 
         return results;
     });
