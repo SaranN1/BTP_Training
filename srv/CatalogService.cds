@@ -26,8 +26,18 @@ service CatalogService @(path : '/CatalogService') {
     function sleep() returns Boolean;
 
     entity POs @(title : '{i18n>poHeader}')    as projection on transaction.purchaseorder {
-        *,
-        Items : redirected to POItems
+        *,        
+        Items : redirected to POItems,
+        case LIFECYCLE_STATUS
+            when 'N' then 'New'
+            when 'B' then 'Blocked'
+            when 'D' then 'Delivered'
+            end as LIFECYCLE_STATUS: String(20),
+        case LIFECYCLE_STATUS
+            when 'N' then 2
+            when 'B' then 1
+            when 'D' then 3
+            end as MyCriticality: Integer
     }actions{
         function largestOrder() returns array of POs;
         action boost();

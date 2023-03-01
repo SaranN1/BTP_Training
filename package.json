@@ -14,7 +14,8 @@
     "sap-hdbext-promisfied": "^2.202301.1"
   },
   "scripts": {
-    "start": "cds run"
+    "start": "cds run",
+    "watch-purchaseorderapp": "cds watch --open purchaseorderapp/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "engines": {
     "node": "^16.15"
@@ -55,6 +56,10 @@
     }
   },
   "devDependencies": {
-    "@sap/hdi-deploy": "^4.5.3"
-  }
+    "@sap/hdi-deploy": "^4.5.3",
+    "@sap/ux-specification": "^1.102.17"
+  },
+  "sapux": [
+    "app/purchaseorderapp"
+  ]
 }
