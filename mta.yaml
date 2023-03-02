@@ -30,7 +30,7 @@ modules:
         url: '~{srv-url}'
 - name: MyCap-db-deployer
   type: hdb
-  path: db
+  path: gen/db
   requires:
   - name: MyCap-db
     properties:
