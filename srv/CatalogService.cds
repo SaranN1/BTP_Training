@@ -43,6 +43,8 @@ service CatalogService @(path : '/CatalogService') {
         action boost();
     }
 
+  annotate POs with @odata.draft.enabled;
+  
     entity POItems @(title : '{i18n>poItems}') as projection on transaction.poitems {
         *,
         PARENT_KEY   : redirected to POs,
