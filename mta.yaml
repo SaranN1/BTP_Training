@@ -16,6 +16,18 @@ modules:
     buildpack: nodejs_buildpack
   build-parameters:
     builder: npm-ci
+    
+- name: mycap-ui
+  type: nodejs
+  path: app
+  requires:
+    - name: srv-api
+      group: destinations
+      properties:
+        name: srv-api
+        strictSSL: true
+        forwardAuthToken: true
+        url: '~{srv-url}'
 - name: MyCap-db-deployer
   type: hdb
   path: db
