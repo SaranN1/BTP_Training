@@ -7,6 +7,7 @@ modules:
   type: nodejs
   path: gen/srv
   requires:
+  - name: MyCap-xsuaa
   - name: MyCap-db
   provides:
   - name: srv-api
@@ -21,6 +22,7 @@ modules:
   type: nodejs
   path: app
   requires:
+    - name: MyCap-xsuaa
     - name: srv-api
       group: destinations
       properties:
@@ -67,6 +69,15 @@ resources:
     service-name: tom
   properties:
     the-service-name: ${service-name}
+
+- name: MyCap-xsuaa
+  type: org.cloudfoundry.managed-service
+  description: Automatically created by CF
+  parameters:
+    service: xsuaa
+    service-plan: application
+    path: ./xs-security.json
+
 parameters:
   enable-parallel-deployments: true
 build-parameters:
