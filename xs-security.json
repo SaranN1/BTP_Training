@@ -38,5 +38,9 @@
                 "$XSAPPNAME.Admin"
             ]
         }
-    ]
+    ],
+    "oauth2-configuration": {
+        "token-validity": 900,
+        "redirect-uris": ["https://c9507ff2trial-dev-mycap-ui.cfapps.us10-001.hana.ondemand.com"]
+    }
 }
